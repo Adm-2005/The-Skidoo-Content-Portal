@@ -4,6 +4,19 @@ module.exports = {
     "./views/**/*.ejs",
     "./public/**/*.html,.css", 
   ],
+  safelist: [
+    "bg-red-500", 
+    "bg-blue-500", 
+    "bg-gray-50", 
+    "p-4", 
+    "p-2",
+    "space-y-4",
+    "border",
+    "rounded", 
+    "rounded-lg",
+    "text-white", 
+    "w-full"
+  ],
   theme: {
     extend: {},
   },

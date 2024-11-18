@@ -1,146 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Create Blog Post</title>
   <link rel="stylesheet" href="/styles/style.css">
+  <title>The Skidoo | Content Portal</title>
 </head>
+<body class="font-sans bg-gray-100 text-gray-900">
+    <nav class="bg-gray-900 py-4 px-6 flex justify-between items-center">
+        <div class="text-white text-2xl font-bold">The Skidoo</div>
+        <button class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-600">Login</button>
+    </nav>
 
-<body class="bg-gray-100">
-  <div class="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-md mt-10">
-    <h1 class="text-2xl font-bold mb-4 text-center">Create a Blog Post</h1>
-    <form onsubmit="submitForm(event)"  id="blogForm" class="space-y-4">
-      <div>
-        <label for="title" class="block font-medium text-gray-700">Title</label>
-        <input type="text" id="title" name="title" class="w-full p-2 border rounded-lg" required>
-      </div>
+    <main class="max-w-4xl mx-auto p-6">
+        <h1 class="text-4xl font-semibold text-center mb-4 text-gray-800">Welcome to The Skidoo's Content Portal</h1>
+        <p class="text-xl text-center mb-6 text-gray-600">What action do you wish to perform today?</p>
 
-      <div>
-        <label for="slug" class="block font-medium text-gray-700">Slug</label>
-        <input type="text" id="slug" name="slug" class="w-full p-2 border rounded-lg" required>
-      </div>
+        <ul class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <a href="/create-post" class="bg-white p-6 rounded-lg shadow-lg text-center hover:bg-gray-100 transition duration-300">
+                <li class="text-2xl font-semibold text-gray-900">Create a Post</li>
+            </a>
+            <a href="/delete-post" class="bg-white p-6 rounded-lg shadow-lg text-center hover:bg-gray-100 transition duration-300">
+                <li class="text-2xl font-semibold text-gray-900">Delete a Post</li>
+            </a>
+            <a href="/edit-post" class="bg-white p-6 rounded-lg shadow-lg text-center hover:bg-gray-100 transition duration-300">
+                <li class="text-2xl font-semibold text-gray-900">Edit a Post</li>
+            </a>
+            <a href="/view-post" class="bg-white p-6 rounded-lg shadow-lg text-center hover:bg-gray-100 transition duration-300">
+                <li class="text-2xl font-semibold text-gray-900">View a Post</li>
+            </a>
+        </ul>
+    </main>
 
-      <div>
-        <label for="category" class="block font-medium text-gray-700">Category</label>
-        <input type="text" id="category" name="category" class="w-full p-2 border rounded-lg" required>
-      </div>
+    <!-- <footer class="bg-gray-900 text-white py-6 text-center">
+        <p>&copy; 2024 The Skidoo. All rights reserved.</p>
+    </footer> -->
 
-      <div>
-        <label for="location" class="block font-medium text-gray-700">Location</label>
-        <input type="text" id="location" name="location" class="w-full p-2 border rounded-lg" required>
-      </div>
-
-      <div>
-        <label for="keywords" class="block font-medium text-gray-700">Keywords</label>
-        <input type="text" id="keywords" name="keywords" class="w-full p-2 border rounded-lg">
-      </div>
-
-      <div>
-        <label for="metaTitle" class="block font-medium text-gray-700">Meta Title</label>
-        <input type="text" id="metaTitle" name="metaTitle" class="w-full p-2 border rounded-lg">
-      </div>
-
-      <div>
-        <label for="metaDescription" class="block font-medium text-gray-700">Meta Description</label>
-        <textarea id="metaDescription" name="metaDescription" class="w-full p-2 border rounded-lg"></textarea>
-      </div>
-
-      <div id="sectionsContainer" class="space-y-4"></div>
-      <button type="button" onclick="addSection()" class="bg-green-500 text-white px-4 py-2 rounded">Add Section</button>
-
-      <div id="mediaContainer" class="space-y-4"></div>
-      <button type="button" onclick="addMedia()" class="bg-blue-500 text-white px-4 py-2 rounded">Add Global Media</button>
-
-      <button type="submit" class="bg-black text-white px-6 py-2 rounded w-full mt-6">Submit</button>
-    </form>
-  </div>
-
-  <script>
-    let sections = [];
-    let globalMedia = [];
-  
-    function createInput(name, placeholder) {
-      const input = document.createElement('input');
-      input.type = 'text';
-      input.placeholder = placeholder;
-      input.className = 'w-full p-2 border rounded-lg';
-      input.name = name;
-      input.dataset.name = name;
-      return input;
-    }
-  
-    function createTextarea(name, placeholder) {
-      const textarea = document.createElement('textarea');
-      textarea.placeholder = placeholder;
-      textarea.className = 'w-full p-2 border rounded-lg';
-      textarea.name = name;
-      textarea.dataset.name = name;
-      return textarea;
-    }
-  
-    function addMedia() {
-      const container = document.getElementById('mediaContainer');
-      const mediaDiv = document.createElement('div');
-      mediaDiv.className = 'border p-4 rounded-lg bg-gray-50 space-y-2';
-  
-      const mediaTypeInput = createInput('media.type', 'Media Type');
-      mediaDiv.appendChild(mediaTypeInput);
-  
-      const mediaLinkInput = createInput('media.link', 'Media Link');
-      mediaDiv.appendChild(mediaLinkInput);
-  
-      const removeMediaBtn = document.createElement('button');
-      removeMediaBtn.type = 'button';
-      removeMediaBtn.textContent = 'Remove Media';
-      removeMediaBtn.className = 'bg-red-500 text-white px-4 py-2 rounded';
-      removeMediaBtn.onclick = () => mediaDiv.remove();
-      mediaDiv.appendChild(removeMediaBtn);
-  
-      container.appendChild(mediaDiv);
-    }
-  
-    async function submitForm(event) {
-      event.preventDefault();
-  
-      const formData = {
-        id: null,
-        title: document.querySelector('[name="title"]').value,
-        slug: document.querySelector('[name="slug"]').value,
-        category: document.querySelector('[name="category"]').value,
-        location: document.querySelector('[name="location"]').value,
-        keywords: document.querySelector('[name="keywords"]').value.split(',').map(k => k.trim()),
-        meta: {
-          title: document.querySelector('[name="metaTitle"]').value,
-          description: document.querySelector('[name="metaDescription"]').value,
-        },
-        sections,
-        media: Array.from(document.querySelectorAll('#mediaContainer .border')).map(mediaDiv => ({
-          type: mediaDiv.querySelector('[data-name="media.type"]').value,
-          link: mediaDiv.querySelector('[data-name="media.link"]').value,
-        })),
-        created_at: null,
-        updated_at: null,
-      };
-  
-      const response = await fetch('/upload-data', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-  
-      if (response.ok) {
-        alert('Data submitted successfully!');
-      } else {
-        alert('Error submitting data.');
-      }
-    }
-  </script>
-  
-
+    <script src="/scripts/index.js"></script>
 </body>
-
 </html>

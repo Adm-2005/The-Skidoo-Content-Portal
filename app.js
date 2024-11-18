@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const path = require('node:path');
 
-const uploadDataRoute = require('./routes/uploadData.js');
+const createPostRoute = require('./routes/createPostRoute.js');
 
 const app = express();
 
@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.use('/', uploadDataRoute);
+app.use('/', createPostRoute);
 
 app.use((err, req, res, next) => {
     console.log(`Error: ${err}.`);
